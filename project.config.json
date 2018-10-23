@@ -1,0 +1,15 @@
+{
+	"description": "knowledge delivery",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wx8d40fe1bb9bbfd2c",
+	"projectname": "knowledge_delivery",
+	"miniprogramRoot": "dist/",
+	"condition": {}
+}
