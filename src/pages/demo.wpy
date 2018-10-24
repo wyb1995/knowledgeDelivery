@@ -17,7 +17,6 @@
 </style>
 <template>
   <view class="container">
-    <button  type="primary" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</button>
     <view class="userinfo" @tap="handleViewTap">
       <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>

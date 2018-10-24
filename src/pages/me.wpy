@@ -1,0 +1,20 @@
+<style lang="less">
+</style>
+<template>
+  <view>这里是我的个人主页</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import Panel from '@/components/panel' // alias example
+  import Group from '../components/group'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '我'
+    }
+  }
+</script>
