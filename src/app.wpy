@@ -22,8 +22,9 @@
   export default class extends wepy.app {
     config = {
       pages: [
-        'pages/demo',
+        'pages/upload',
         'pages/home',
+        'pages/classify',
         'pages/me'
       ],
       window: {
@@ -45,16 +46,22 @@
             text: '首页'
           },
           {
+            pagePath: 'pages/classify',
+            selectedIconPath: './photo/classify.png',
+            iconPath: './photo/classify.png',
+            text: '分类'
+          },
+          {
+            pagePath: 'pages/upload',
+            selectedIconPath: './photo/upload.png',
+            iconPath: './photo/upload.png',
+            text: '发布课程'
+          },
+          {
             pagePath: 'pages/me',
             selectedIconPath: './photo/me.png',
             iconPath: './photo/me.png',
             text: '我'
-          },
-          {
-            pagePath: 'pages/demo',
-            selectedIconPath: './photo/demo.png',
-            iconPath: './photo/demo.png',
-            text: 'demo'
           }
         ]
       }

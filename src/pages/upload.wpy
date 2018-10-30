@@ -1,0 +1,152 @@
+<style lang="less">
+  .block {
+    background: #fff;
+  }
+
+  .list_item {
+    align-items: center;
+    border-top: 1px solid #efefef;
+    padding: 35 rpx 20 rpx;
+    margin-bottom: 10px;
+    .title {
+      margin-right: 20 rpx;
+    }
+    .input {
+      flex: 1;
+      border-bottom: 1px solid black;
+      margin: 10px;
+      input {
+        color: #333;
+      }
+      textarea {
+        color: #333;
+        height: 100px;
+      }
+    }
+    .red_asterisk {
+      color: red;
+    }
+  }
+
+  .btn_box {
+    margin-top: 64rpx;
+    padding: 0 24rpx;
+  }
+</style>
+<template>
+  <form bindsubmit="uploadTopic">
+    <view class="block">
+      <view class="list_item">
+        <view class="title"><span class="red_asterisk">*</span>课程主题： </view>
+        <view class="input">
+          <input type="text" name="topicName" placeholder="请填写您的课程主题(不超过15字)" value=""/>
+        </view>
+      </view>
+      <view class="list_item">
+        <view class="title"><span class="red_asterisk">*</span>课程内容： </view>
+        <view class="input">
+          <textarea type="text" name="topicContent" placeholder="请简要描述您的课程内容" value=""/>
+        </view>
+      </view>
+      <view class="list_item">
+        <view class="title"><span class="red_asterisk">*</span>课程分类： </view>
+        <view class="input">
+          <picker @change="bindClassifyPickerChange" value="{{classifyIndex}}" range="{{classify}}">
+            <view class="picker">
+              当前选择：{{classify[classifyIndex]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="list_item">
+        <view class="title"><span class="red_asterisk">*</span>上课人数： </view>
+        <view class="input">
+          <picker @change="bindNumberPickerChange" value="{{numberIndex}}" range="{{number}}">
+            <view class="picker">
+              当前选择：{{number[numberIndex]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="list_item">
+        <view class="title"><span class="red_asterisk">*</span>开始时间： </view>
+        <view class="input">
+          <picker mode="date" value="{{startDate}}" start="{{today}}" end="2027-09-01" @change="bindStartDateChange">
+            <view class="picker">
+              当前选择：{{startDate}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="list_item">
+        <view class="title"><span class="red_asterisk">*</span>结束时间： </view>
+        <view class="input">
+          <picker mode="date" @change="bindEndDateChange" start="{{startDate}}" end="2020-12-12" value="{{endDate}}">
+            <view class="picker">
+              当前选择：{{endDate}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="btn_box">
+      <button class="button type_red" formType="submit">完成</button>
+    </view>
+  </form>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import Panel from '@/components/panel' // alias example
+  import Group from '../components/group'
+  import Toast from 'wepy-com-toast'
+  import testMixin from '../mixins/test'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '课程发布'
+    }
+
+    data = {
+      classify: ['学校课程', '艺术课程', '计算机课程', '其他'],
+      classifyIndex: 0,
+      number: ['1 V 1', '1 V 3', '1 V 5', '1 V 10', '1 V N'],
+      numberIndex: 0,
+      today: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+      startDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+      endDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
+    }
+
+    bindClassifyPickerChange(e) {
+      console.log('classify picker发送选择改变，携带值为', e.detail.value)
+      this.classifyIndex = e.detail.value
+    }
+
+    bindNumberPickerChange(e) {
+      console.log('number picker发送选择改变，携带值为', e.detail.value)
+      this.numberIndex = e.detail.value
+    }
+
+    bindStartDateChange(e) {
+      console.log('start date picker发送选择改变，携带值为', e.detail.value)
+      this.startDate = e.detail.value
+    }
+
+    bindEndDateChange(e) {
+      console.log('end date picker发送选择改变，携带值为', e.detail.value)
+      this.endDate = e.detail.value
+    }
+
+    uploadTopic(e) {
+      let topicName = e.detail.value.topicName
+      let topicContent = e.detail.value.topicContent
+      let topicClassify = this.classify[this.classifyIndex]
+      let topicPeopleNumber = this.number[this.numberIndex]
+      let topicStartDate = this.startDate
+      let topicEndDate = this.endDate
+
+      console.log(topicName, topicContent, topicClassify, topicPeopleNumber, topicStartDate, topicEndDate)
+    }
+  }
+</script>
